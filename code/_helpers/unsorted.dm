@@ -15,11 +15,9 @@
 
 	if (!( istext(HTMLstring) ))
 		CRASH("Given non-text argument!")
-		return
 	else
 		if (length(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
-			return
 	var/textr = copytext(HTMLstring, 2, 4)
 	var/textg = copytext(HTMLstring, 4, 6)
 	var/textb = copytext(HTMLstring, 6, 8)
@@ -1095,3 +1093,15 @@ var/list/WALLITEMS = list(
 			else
 				return "\[[url_encode(thing.tag)]\]"
 	return "\ref[input]"
+
+//takes an input_key, as text, and the list of keys already used, outputting a replacement key in the format of "[input_key] ([number_of_duplicates])" if it finds a duplicate
+//use this for lists of things that might have the same name, like mobs or objects, that you plan on giving to a player as input
+/proc/avoid_assoc_duplicate_keys(input_key, list/used_key_list)
+	if(!input_key || !istype(used_key_list))
+		return
+	if(used_key_list[input_key])
+		used_key_list[input_key]++
+		input_key = "[input_key] ([used_key_list[input_key]])"
+	else
+		used_key_list[input_key] = 1
+	return input_key

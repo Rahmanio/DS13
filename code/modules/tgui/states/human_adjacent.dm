@@ -1,17 +1,24 @@
+/*!
+ * Copyright (c) 2020 Aleksej Komarov
+ * SPDX-License-Identifier: MIT
+ */
 
- /**
-  * tgui state: human_adjacent_state
-  *
-  * In addition to default checks, only allows interaction for a
-  * human adjacent user.
- **/
+/**
+ * tgui state: tg_human_adjacent_state
+ *
+ * In addition to default checks, only allows interaction for a
+ * human adjacent user.
+ */
 
-/var/global/datum/ui_state/human_adjacent_state/tg_human_adjacent_state = new()
+GLOBAL_DATUM_INIT(tg_human_adjacent_state, /datum/ui_state/tg_human_adjacent_state, new)
 
-/datum/ui_state/human_adjacent_state/can_use_topic(src_object, mob/user)
-	. = user.default_can_use_topic(src_object)
+/datum/ui_state/tg_human_adjacent_state/can_use_topic(src_object, mob/user)
+	return user.tg_human_adjacent_can_use_topic(src_object)
 
-	var/dist = get_dist(src_object, user)
-	if((dist > 1) || (!ishuman(user)))
+/mob/proc/tg_human_adjacent_can_use_topic(src_object)
+	. = src.default_can_use_topic(src_object)
+
+	var/dist = get_dist(src_object, src)
+	if((dist > 1) || (!ishuman(src)))
 		// Can't be used unless adjacent and human, even with TK
 		. = min(., UI_UPDATE)

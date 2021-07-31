@@ -37,7 +37,10 @@
 	var/irc_admin			//IRC admin that spoke with them last.
 	var/mute_irc = 0
 	var/warned_about_multikeying = 0	// Prevents people from being spammed about multikeying every time their mob changes.
-
+	var/connection_time //world.time they connected
+	var/connection_realtime //world.realtime they connected
+	var/connection_timeofday //world.timeofday they connected
+	
 		////////////////////////////////////
 		//things that require the database//
 		////////////////////////////////////
@@ -61,3 +64,6 @@
 
 	//Static framerate
 	fps = 40
+
+	// List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
+	var/list/sent_assets = list()

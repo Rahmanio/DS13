@@ -1,12 +1,17 @@
- /**
-  * tgui state: conscious_state
-  *
-  * Only checks if the user is conscious.
- **/
+/*!
+ * Copyright (c) 2020 Aleksej Komarov
+ * SPDX-License-Identifier: MIT
+ */
 
-/var/global/datum/ui_state/conscious_state/tg_conscious_state = new()
+/**
+ * tgui state: tg_conscious_state
+ *
+ * Only checks if the user is conscious.
+ */
 
-/datum/ui_state/conscious_state/can_use_topic(src_object, mob/user)
+GLOBAL_DATUM_INIT(tg_conscious_state, /datum/ui_state/tg_conscious_state, new)
+
+/datum/ui_state/tg_conscious_state/can_use_topic(src_object, mob/user)
 	if(user.stat == CONSCIOUS)
 		return UI_INTERACTIVE
 	return UI_CLOSE

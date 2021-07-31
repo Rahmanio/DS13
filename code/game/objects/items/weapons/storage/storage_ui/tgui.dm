@@ -24,7 +24,7 @@
 	cached_ui_data = null
 	tg_ui_interact(user)
 
-/datum/storage_ui/tgui/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_physical_state)
+/datum/storage_ui/tgui/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.tg_physical_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "storage", storage.name, 340, 440, master_ui, state)

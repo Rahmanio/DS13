@@ -228,3 +228,12 @@ var/list/holder_mob_icon_cache = list()
 		//If none of the above are true, we must be inside a box or backpack or something. Keep recursing up.
 
 	return null//If we get here, the holder must be buried many layers deep in nested containers. Shouldn't happen
+
+/proc/IsAdminGhost(mob/user)
+	if(!isobserver(user))
+		return FALSE
+	if(!user.client)
+		return FALSE
+	if(!check_rights(R_ADMIN, FALSE, user.client)) // Are they allowed?
+		return FALSE
+	return TRUE
